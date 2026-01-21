@@ -79,12 +79,13 @@ header {
 }
 
 .logo h1 span {
-    font-size: 75%;
-    font-weight: 500;
+    font-size: 0.65rem;
+    font-weight: 400;
     color: var(--gray-500);
-    margin-right: 8px;
+    margin-bottom: 2px;
     display: block;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
 }
 
 .nav-menu {
@@ -107,11 +108,11 @@ header {
    Hero Section
 -------------------- */
 .hero {
-    min-height: 70vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     background: var(--bg-warm);
-    padding: 60px 0;
+    padding: 40px 0;
 }
 
 .hero-content {
@@ -176,7 +177,7 @@ header {
    Sections
 -------------------- */
 .section {
-    padding: 60px 0;
+    padding: 40px 0;
 }
 
 .section-title {
