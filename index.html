@@ -1,264 +1,175 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라온동행교회 - 부천</title>
-    <meta name="description" content="부천 라온동행교회 - 가족같은 공동체">
+    <title>라온동행교회 - 즐거운 동행, 삶으로 드리는 신앙</title>
+    <meta name="description" content="하나님과, 이웃과, 세상과 즐겁게 동행하는 라온동행교회입니다.">
+
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- 헤더 -->
     <header>
         <nav class="navbar">
             <div class="container">
-                <div class="logo">
+                <a href="#" class="logo">
                     <h1>라온동행교회</h1>
-                    <p class="tagline">즐거운 동행, 함께하는 신앙</p>
-                </div>
+                </a>
                 <ul class="nav-menu">
-                    <li><a href="#home">홈</a></li>
                     <li><a href="#about">교회소개</a></li>
                     <li><a href="#worship">예배안내</a></li>
-                    <li><a href="#sermon">메시지</a></li>
-                    <li><a href="#contact">오시는 길</a></li>
+                    <li><a href="#sermon">설교말씀</a></li>
+                    <li><a href="#contact">오시는길</a></li>
                 </ul>
-                <div class="hamburger">
+                <button class="menu-toggle" aria-label="메뉴 열기">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!-- 메인 히어로 섹션 -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>라온동행교회에 오신 것을 환영합니다</h2>
-            <p class="hero-subtitle">성도가 하나님과 공동체 그리고 세상과 즐거운 동행을 지향합니다</p>
-            <p class="hero-verse">"두세 사람이 내 이름으로 모인 곳에는 나도 그들 중에 있느니라" - 마태복음 18:20</p>
-            <div class="hero-buttons">
-                <a href="#worship" class="btn btn-primary">예배 안내</a>
-                <a href="#contact" class="btn btn-secondary">오시는 길</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 교회 소개 -->
-    <section id="about" class="section about">
-        <div class="container">
-            <h2 class="section-title">교회 소개</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>가족같은 공동체, 라온동행교회</h3>
-                    <p><strong>라온</strong>은 순우리말로 <strong>"즐거운"</strong>이라는 뜻입니다.</p>
-                    <p>2016년 12월 25일, 부천에서 개척된 라온동행교회는 서로 사랑하고 섬기는 가족같은 공동체를 지향합니다.</p>
-                    
-                    <div class="values">
-                        <div class="value-item">
-                            <h4>💒 교회의 본질</h4>
-                            <p>건물이 아닌 사람, 형식이 아닌 관계 중심의 교회</p>
-                        </div>
-                        <div class="value-item">
-                            <h4>🤝 즐거운 동행</h4>
-                            <p>하나님과 공동체 그리고 세상과 함께 걷는 신앙의 여정</p>
-                        </div>
-                        <div class="value-item">
-                            <h4>✝️ 웨슬리 신학</h4>
-                            <p>기독교대한성결교회 소속, 존 웨슬리의 성결신학을 따릅니다</p>
-                        </div>
-                    </div>
-
-                    <blockquote class="pastor-quote">
-                        "신앙은 보수적으로, 신학은 진보적으로, 삶은 현장성 있게"
-                    </blockquote>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero-content fade-up">
+                    <span class="hero-eyebrow">RAON DONGHANG CHURCH</span>
+                    <h1 class="hero-title">즐거운 동행,<br>삶으로 드리는 신앙</h1>
+                    <p class="hero-subtitle">우리는 하나님과 함께 걷고,<br>사람과 함께 자라며,<br>세상 속으로 기쁨을 들고 나아갑니다.</p>
+                    <a href="#about" class="btn btn-primary">교회 소개 →</a>
                 </div>
             </div>
+        </section>
 
-            <!-- 교회 사진 갤러리 -->
-            <div class="church-gallery" style="margin-top: 4rem;">
-                <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">우리 교회 이야기</h3>
-                <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto;">
-                    <div class="gallery-item" style="border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-                        <img src="church-photo1.jpg" alt="라온동행교회 야외 단체 사진" style="width: 100%; height: auto; display: block;">
-                        <div style="padding: 1.5rem; background: white;">
-                            <p style="color: var(--primary-color); font-weight: 600; margin: 0;">함께하는 즐거움</p>
-                            <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">야외 활동 중인 교우들</p>
-                        </div>
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="fade-up">
+                    <h2 class="section-title">우리는 이런 교회입니다</h2>
+                    <h3 class="about-heading" style="margin-bottom: 8px;">라온은 ‘즐거움’입니다.</h3>
+                    <p class="section-intro">가볍지 않은 기쁨,<br>혼자가 아니라 함께 걷기 때문에 가능한 즐거움입니다.</p>
+                </div>
+
+                <div class="about-content fade-up">
+                    <div class="about-declaration">
+                        <p>우리는 하나님과 동행하는 교회입니다.<br>그래서 예배가 중심이 됩니다.</p>
+                        <p>우리는 성도와 동행하는 교회입니다.<br>그래서 혼자가 아닌 공동체로 신앙을 배웁니다.</p>
+                        <p>우리는 세상과 동행하는 교회입니다.<br>그래서 교회는 건물이 아니라 삶의 자리로 향합니다.</p>
                     </div>
-                    <div class="gallery-item" style="border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-                        <img src="church-photo2.jpg" alt="라온동행교회 카페 실내 단체 사진" style="width: 100%; height: auto; display: block;">
-                        <div style="padding: 1.5rem; background: white;">
-                            <p style="color: var(--primary-color); font-weight: 600; margin: 0;">카페에서의 교제</p>
-                            <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">라온트리 카페에서 함께한 시간</p>
-                        </div>
+
+                    <div class="pastor-quote">
+                        신앙은 붙들고,<br>신학은 질문하며,<br>삶은 현장에서 살아냅니다.
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 예배 안내 -->
-    <section id="worship" class="section worship">
-        <div class="container">
-            <h2 class="section-title">예배 안내</h2>
-            <div class="worship-info">
-                <div class="worship-card">
-                    <h3>주일 예배</h3>
-                    <p class="time">매주 일요일 오전 10시</p>
-                    <p class="location">📍 카페 라온트리 2층</p>
-                    <p class="description">가족같은 분위기에서 함께 드리는 예배</p>
-                </div>
+        <!-- Worship Section -->
+        <section class="section" id="worship" style="background-color: var(--bg-light);">
+            <div class="container fade-up">
+                <h2 class="section-title">예배 안내</h2>
+                <p class="section-intro" style="margin-bottom: 48px;">예배는 주일에 시작되지만,<br>삶에서 완성됩니다.</p>
 
-                <div class="worship-card">
-                    <h3>금요기도회</h3>
-                    <p class="time">매주 금요일 저녁 7시</p>
-                    <p class="location">📍 카페 라온트리</p>
-                    <p class="description">말씀과 기도로 함께하는 시간</p>
-                </div>
-                
-                <div class="worship-notice">
-                    <h4>예배 안내</h4>
-                    <ul>
-                        <li>카페 공간에서 예배를 드립니다</li>
-                        <li>편안한 복장으로 참석하실 수 있습니다</li>
-                        <li>예배 후 교제와 나눔의 시간이 있습니다</li>
-                        <li>처음 오시는 분들을 위한 안내가 준비되어 있습니다</li>
-                    </ul>
+                <div class="worship-info">
+                    <div class="worship-card">
+                        <span class="time">주일 오전 10:00</span>
+                        <h3>주일 예배</h3>
+                        <p class="location">카페 라온트리 2층 (본당)</p>
+                        <p class="about-paragraph" style="font-size: 0.95rem; margin-top: 12px;">온 가족이 함께 드리는<br>따뜻한 통합
+                            예배입니다.</p>
+                    </div>
+
+                    <div class="worship-card">
+                        <span class="time">매주 금요일 저녁 07:00</span>
+                        <h3>금요 기도회</h3>
+                        <p class="location">카페 라온트리</p>
+                        <p class="about-paragraph" style="font-size: 0.95rem; margin-top: 12px;">한 주간의 삶을 나누고<br>기도로
+                            고백하는 시간입니다.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 라온동행교회 메시지 -->
-    <section id="sermon" class="section sermon">
-        <div class="container">
-            <h2 class="section-title">라온동행교회 메시지</h2>
-            <div class="sermon-content">
-                <div class="sermon-intro">
-                    <h3>말씀으로 함께 나누는 은혜</h3>
-                    <p>라온동행교회의 메시지를 영상으로 만나보세요.</p>
+        <!-- Sermon Section -->
+        <section class="section" id="sermon">
+            <div class="container">
+                <div class="fade-up" style="margin-bottom: 64px;">
+                    <h2 class="section-title">신앙은 설명이 아니라, 동행입니다.</h2>
                 </div>
 
-                <!-- 유튜브 영상 그리드 -->
-                <div class="youtube-grid">
-                    <!-- 영상 1 -->
+                <div class="youtube-grid fade-up">
                     <div class="youtube-item">
                         <div class="youtube-video">
-                            <iframe 
-                                src="https://www.youtube.com/embed/GZPC_mOYnho" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
+                            <iframe
+                                src="https://www.youtube.com/embed/videoseries?list=PLhgg9YNNliNSEfC2l7acPQ29gBY-xvJxk"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
                         </div>
                         <div class="youtube-info">
-                            <h4>라온동행교회 메시지</h4>
-                            <p class="youtube-date">2025.01.12</p>
+                            <h3 class="about-heading" style="margin-bottom: 8px;">주일 설교 말씀</h3>
+                            <p class="about-paragraph" style="margin-bottom: 16px;">정기적으로 업데이트되는 라온동행교회의 주일 메시지입니다. 언제
+                                어디서든 말씀과 함께 동행하세요.</p>
+                            <a href="https://www.youtube.com/@%EB%9D%BC%EC%98%A8%EB%8F%99%ED%96%89%EA%B5%90%ED%9A%8C"
+                                target="_blank" class="btn-text">유튜브 채널 바로가기 →</a>
                         </div>
                     </div>
-
-                    <!-- 새로운 영상을 추가하려면 위의 youtube-item 블록을 복사해서 아래에 추가하세요 -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 오시는 길 -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section-title">오시는 길</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>라온동행교회 / 카페 라온트리</h3>
-                    <div class="info-items">
-                        <div class="info-item">
-                            <strong>📍 주소</strong>
-                            <p>경기도 부천시 소사로 203 2층</p>
-                            <p class="sub-info">카페 라온트리</p>
-                        </div>
-                        <div class="info-item">
-                            <strong>📞 연락처</strong>
-                            <p>전화: 010-5177-0845</p>
-                        </div>
-                        <div class="info-item">
-                            <strong>🚇 대중교통</strong>
-                            <p>전철: 소사역 하차 후 도보 10분</p>
-                            <p>버스: 소사초등학교 앞 사거리 하차</p>
-                        </div>
-                        <div class="info-item">
-                            <strong>📱 소셜미디어</strong>
-                            <div class="social-links">
-                                <a href="https://www.instagram.com/raon_donghang" target="_blank" class="social-link">
-                                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                    </svg>
-                                    www.instagram.com/raon_donghang
-                                </a>
-                                <a href="https://www.facebook.com/raondonghang" target="_blank" class="social-link">
-                                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                    </svg>
-                                    www.facebook.com/raondonghang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Contact Section -->
+        <section class="section" id="contact" style="background-color: var(--bg-warm);">
+            <div class="container">
+                <div class="fade-up">
+                    <h2 class="section-title">오시는 길</h2>
                 </div>
 
-                <div class="map-container">
-                    <h4>찾아오시는 길</h4>
-                    <div style="width:100%;height:400px;">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.1!2d126.8053!3d37.4768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI4JzM2LjUiTiAxMjbCsDQ4JzE5LjEiRQ!5e0!3m2!1sko!2skr!4v1234567890123!5m2!1sko!2skr" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0;border-radius:8px;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <div class="contact-content fade-up">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <span class="label">주소</span>
+                            <span class="value">경기도 부천시 소사로 203 2층 (카페 라온트리)</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">교통편</span>
+                            <span class="value">소사역(1호선/서해선) 도보 10분, 소사초등학교 앞 하차</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">상담 및 문의</span>
+                            <span class="value">010-5177-0845</span>
+                        </div>
+
+                        <div class="map-btns">
+                            <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%B6%80%EC%B2%9C%EC%8B%9C%20%EC%86%8C%EC%82%AC%EB%A1%9C%20203"
+                                target="_blank" class="btn btn-secondary">네이버 지도</a>
+                            <a href="https://map.kakao.com/link/map/%EB%9D%BC%EC%98%A8%EB%8F%99%ED%96%89%EA%B5%90%ED%9A%8C,37.4768,126.8053"
+                                target="_blank" class="btn btn-secondary">카카오맵</a>
+                        </div>
                     </div>
-                    <p class="map-note">구글맵으로 위치를 확인하세요</p>
-                    <a href="https://map.naver.com/v5/search/경기도%20부천시%20소사로%20203" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">네이버 지도로 보기</a>
-                    <a href="https://map.kakao.com/link/map/라온동행교회,37.4768,126.8053" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;margin-left: 0.5rem;">카카오맵으로 보기</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- 푸터 -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>라온동행교회</h3>
-                    <p>기독교대한성결교회 소속</p>
-                </div>
-                <div class="footer-links">
-                    <h4>바로가기</h4>
-                    <ul>
-                        <li><a href="#about">교회소개</a></li>
-                        <li><a href="#worship">예배안내</a></li>
-                        <li><a href="#sermon">메시지</a></li>
-                        <li><a href="#contact">오시는 길</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>문의</h4>
-                    <p>📱 전화: 010-5177-0845</p>
-                    <p>📍 경기도 부천시 소사로 203 2층</p>
-                </div>
+            <div class="footer-declaration">
+                함께 걷는 믿음,<br>
+                함께 자라는 교회
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 라온동행교회. All rights reserved.</p>
-                <p class="footer-verse">"신앙은 보수적으로, 신학은 진보적으로, 삶은 현장성 있게"</p>
-            </div>
+            <p class="footer-copy">© 2025 Raon Donghang Church</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
