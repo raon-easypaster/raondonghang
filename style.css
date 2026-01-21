@@ -108,11 +108,11 @@ header {
    Hero Section
 -------------------- */
 .hero {
-    min-height: 60vh;
+    min-height: 40vh;
     display: flex;
     align-items: center;
     background: var(--bg-warm);
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
 .hero-content {
@@ -130,15 +130,15 @@ header {
 .hero-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
-    line-height: 1.25;
+    line-height: 1.2;
     letter-spacing: -0.03em;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .hero-subtitle {
     font-size: 1.1rem;
     color: var(--gray-700);
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 /* --------------------
@@ -177,20 +177,20 @@ header {
    Sections
 -------------------- */
 .section {
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 .section-title {
     font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 .section-intro {
     font-size: 1.05rem;
     color: var(--gray-700);
-    margin-bottom: 64px;
+    margin-bottom: 32px;
 }
 
 /* --------------------
@@ -205,12 +205,12 @@ header {
 .about-paragraph {
     font-size: 1.05rem;
     color: var(--gray-700);
-    margin-bottom: 56px;
+    margin-bottom: 32px;
 }
 
 .about-declaration p {
     font-size: 1.05rem;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .about-declaration strong {
@@ -222,7 +222,7 @@ header {
    Quote
 -------------------- */
 .pastor-quote {
-    margin-top: 80px;
+    margin-top: 40px;
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.6;
