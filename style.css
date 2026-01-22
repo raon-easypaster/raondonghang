@@ -72,6 +72,19 @@ header {
     height: 72px;
 }
 
+.logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
 .logo h1 {
     font-size: 1.2rem;
     font-weight: 700;
