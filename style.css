@@ -375,13 +375,39 @@ header {
 }
 
 .archive-card {
-    background: white;
     padding: 32px;
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.06);
     display: block;
     transition: all 0.3s ease;
+    height: 100%;
 }
+
+/* 각각의 카드에 다른 파스텔 색상 적용 */
+.archive-grid a:nth-child(1) .archive-card {
+    background-color: #f5f3ff;
+    border-color: #ddd6fe;
+}
+
+/* 연보라 */
+.archive-grid a:nth-child(2) .archive-card {
+    background-color: #f0f9ff;
+    border-color: #bae6fd;
+}
+
+/* 연하늘 */
+.archive-grid a:nth-child(3) .archive-card {
+    background-color: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+/* 연녹색 */
+.archive-grid a:nth-child(4) .archive-card {
+    background-color: #fffbeb;
+    border-color: #fef3c7;
+}
+
+/* 연노랑 */
 
 .archive-card h3 {
     font-size: 1.1rem;
@@ -398,12 +424,27 @@ header {
 
 .archive-card:hover {
     transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.archive-grid a:nth-child(1):hover .archive-card {
+    border-color: #7c3aed;
+}
+
+.archive-grid a:nth-child(2):hover .archive-card {
+    border-color: #0ea5e9;
+}
+
+.archive-grid a:nth-child(3):hover .archive-card {
+    border-color: #22c55e;
+}
+
+.archive-grid a:nth-child(4):hover .archive-card {
+    border-color: #f59e0b;
 }
 
 .archive-card:hover h3 {
-    color: var(--accent);
+    opacity: 0.8;
 }
 
 /* --------------------
