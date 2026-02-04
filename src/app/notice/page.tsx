@@ -23,7 +23,7 @@ export default async function NoticePage() {
         <main className="container" style={{ paddingTop: "120px", paddingBottom: "80px", minHeight: "80vh" }}>
             <div className="fade-up visible">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px" }}>
-                    <h1 className="section-title" style={{ marginBottom: 0 }}>공지사항</h1>
+                    <h1 className="section-title" style={{ marginBottom: 0 }}>교회소식</h1>
 
                     {/* 임시 글쓰기 버튼 (나중에 권한 처리 필요) */}
                     <Link href="/notice/write" className="btn btn-secondary" style={{ fontSize: "0.9rem", padding: "10px 20px" }}>
@@ -41,7 +41,7 @@ export default async function NoticePage() {
                     </div>
                 ) : notices.length === 0 ? (
                     <div style={{ textAlign: "center", padding: "80px 0", color: "var(--gray-500)" }}>
-                        등록된 공지사항이 없습니다.
+                        등록된 소식이 없습니다.
                     </div>
                 ) : (
                     <div className="notice-list">

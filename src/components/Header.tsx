@@ -75,7 +75,7 @@ export default function Header() {
                              User didn't ask to ADD links, just migrate. 
                              I will add the basic structure just in case.
                          */}
-                        <li><Link href="/notice" onClick={closeMenu}>공지사항</Link></li>
+                        <li><Link href="/notice" onClick={closeMenu}>교회소식</Link></li>
                     </ul>
                 </div>
             </nav>

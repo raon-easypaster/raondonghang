@@ -7,6 +7,7 @@ export default function WritePage() {
     const router = useRouter();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -17,11 +18,11 @@ export default function WritePage() {
             const res = await fetch("/api/notices", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title, content }),
+                body: JSON.stringify({ title, content, password }),
             });
 
             if (res.ok) {
-                alert("공지사항이 등록되었습니다.");
+                alert("교회소식이 등록되었습니다.");
                 router.push("/notice");
                 router.refresh();
             } else {
@@ -38,9 +39,28 @@ export default function WritePage() {
 
     return (
         <main className="container" style={{ paddingTop: "120px", paddingBottom: "80px" }}>
-            <h1 className="section-title">공지사항 작성</h1>
+            <h1 className="section-title">교회소식 작성</h1>
 
             <form onSubmit={handleSubmit} style={{ maxWidth: "720px", margin: "0 auto" }}>
+                <div style={{ marginBottom: "24px" }}>
+                    <label style={{ display: "block", marginBottom: "8px", fontWeight: "600" }}>관리자 비밀번호</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        style={{
+                            width: "100%",
+                            padding: "12px",
+                            fontSize: "1rem",
+                            borderRadius: "8px",
+                            border: "1px solid #ddd"
+                        }}
+                        placeholder="관리자 비밀번호를 입력하세요"
+                    />
+                    <p style={{ fontSize: "0.85rem", color: "#666", marginTop: "4px" }}>* 관리자만 작성할 수 있습니다.</p>
+                </div>
+
                 <div style={{ marginBottom: "24px" }}>
                     <label style={{ display: "block", marginBottom: "8px", fontWeight: "600" }}>제목</label>
                     <input
