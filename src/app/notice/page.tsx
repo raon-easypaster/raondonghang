@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
+import NoticeActions from "@/components/NoticeActions";
 
 // Force dynamic rendering so we always get the latest notices
 export const dynamic = "force-dynamic";
@@ -54,9 +55,12 @@ export default async function NoticePage() {
                                 alignItems: "center"
                             }}>
                                 <div style={{ flex: 1 }}>
-                                    <h3 style={{ fontSize: "1.2rem", fontWeight: 600, marginBottom: "8px" }}>
-                                        {notice.title}
-                                    </h3>
+                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                                        <h3 style={{ fontSize: "1.2rem", fontWeight: 600, marginBottom: "8px" }}>
+                                            {notice.title}
+                                        </h3>
+                                        <NoticeActions id={notice.id} />
+                                    </div>
                                     <p style={{ fontSize: "0.95rem", color: "var(--gray-700)", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                                         {notice.content}
                                     </p>
