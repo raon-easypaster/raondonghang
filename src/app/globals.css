@@ -669,6 +669,44 @@ footer {
 }
 
 /* --------------------
+   Social Buttons
+-------------------- */
+.social-links-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-social:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-facebook {
+    background-color: #1877F2;
+    /* Facebook Blue */
+}
+
+.btn-instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    /* Instagram Gradient */
+}
+
+/* --------------------
    Responsive
 -------------------- */
 @media (max-width: 768px) {
