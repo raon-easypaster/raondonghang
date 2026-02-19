@@ -131,7 +131,7 @@ export default function HomePopup() {
                         className="popup-link-item"
                     >
                         <span className="icon">🎨</span>
-                        <span className="text">설교 인포그래픽 <small>최신자료</small></span>
+                        <span className="text">설교 인포그래픽 <small>주일 말씀 정리</small></span>
                     </Link>
                     <Link
                         href={links.weekly}
