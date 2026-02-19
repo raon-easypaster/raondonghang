@@ -299,86 +299,86 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <a
-            href="https://www.youtube.com/@easypaster"
-            target="_blank"
-            className="btn btn-primary"
-          >
-            유튜브 채널 바로가기 →
-          </a>
 
-          <div className="social-links-container">
+          <div style={{ textAlign: "center", marginTop: "48px" }}>
             <a
-              href="https://www.facebook.com/raondonghang"
+              href="https://www.youtube.com/@easypaster"
               target="_blank"
-              className="btn-social btn-facebook"
+              className="btn btn-primary"
             >
-              Facebook
+              유튜브 채널 바로가기 →
             </a>
-            <a
-              href="https://www.instagram.com/raon_donghang/"
-              target="_blank"
-              className="btn-social btn-instagram"
-            >
-              Instagram
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
 
-      {/* Contact Section */ }
-  <section
-    className="section"
-    id="contact"
-    style={{ backgroundColor: "var(--bg-warm)" }}
-  >
-    <div className="container">
-      <div className="fade-up">
-        <h2 className="section-title">오시는 길</h2>
-      </div>
-
-      <div className="contact-content fade-up">
-        <div className="contact-info">
-          <div className="info-item">
-            <span className="label">주소</span>
-            <span className="value">
-              경기도 부천시 소사로 203 2층 (카페 라온트리)
-            </span>
-          </div>
-          <div className="info-item">
-            <span className="label">교통편</span>
-            <span className="value">
-              소사역(1호선/서해선) 도보 10분, 소사초등학교 앞 하차
-            </span>
-          </div>
-          <div className="info-item">
-            <span className="label">상담 및 문의</span>
-            <span className="value">010-5606-0845</span>
-          </div>
-
-          <div className="map-btns">
-            <a
-              href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%B6%80%EC%B2%9C%EC%8B%9C%20%EC%86%8C%EC%82%AC%EB%A1%9C%20203"
-              target="_blank"
-              className="btn btn-secondary"
-            >
-              네이버 지도
-            </a>
-            <a
-              href="https://map.kakao.com/link/search/경기도 부천시 소사로 203"
-              target="_blank"
-              className="btn btn-secondary"
-            >
-              카카오맵
-            </a>
+            <div className="social-links-container">
+              <a
+                href="https://www.facebook.com/raondonghang"
+                target="_blank"
+                className="btn-social btn-facebook"
+              >
+                Facebook
+              </a>
+              <a
+                href="https://www.instagram.com/raon_donghang/"
+                target="_blank"
+                className="btn-social btn-instagram"
+              >
+                Instagram
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+
+      {/* Contact Section */}
+      <section
+        className="section"
+        id="contact"
+        style={{ backgroundColor: "var(--bg-warm)" }}
+      >
+        <div className="container">
+          <div className="fade-up">
+            <h2 className="section-title">오시는 길</h2>
+          </div>
+
+          <div className="contact-content fade-up">
+            <div className="contact-info">
+              <div className="info-item">
+                <span className="label">주소</span>
+                <span className="value">
+                  경기도 부천시 소사로 203 2층 (카페 라온트리)
+                </span>
+              </div>
+              <div className="info-item">
+                <span className="label">교통편</span>
+                <span className="value">
+                  소사역(1호선/서해선) 도보 10분, 소사초등학교 앞 하차
+                </span>
+              </div>
+              <div className="info-item">
+                <span className="label">상담 및 문의</span>
+                <span className="value">010-5606-0845</span>
+              </div>
+
+              <div className="map-btns">
+                <a
+                  href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%B6%80%EC%B2%9C%EC%8B%9C%20%EC%86%8C%EC%82%AC%EB%A1%9C%20203"
+                  target="_blank"
+                  className="btn btn-secondary"
+                >
+                  네이버 지도
+                </a>
+                <a
+                  href="https://map.kakao.com/link/search/경기도 부천시 소사로 203"
+                  target="_blank"
+                  className="btn btn-secondary"
+                >
+                  카카오맵
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main >
   );
 }
