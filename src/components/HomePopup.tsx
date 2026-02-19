@@ -29,53 +29,51 @@ export default function HomePopup() {
 
             let dailyLink = "https://raon-easypaster.github.io/daily/";
 
-            // Try to find today's daily meditation or fallback to latest
+            // Try to find today's daily meditation or fallback to closest past date
             try {
                 const today = new Date();
-                const todayStr = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-
-                // Fetch the daily index page
-                // Note: We use a simple fetch here. CORS might be an issue in dev, but GitHub Pages to GitHub Pages usually works or needs proxy.
-                // Since this runs on client, we might face CORS if the easy-paster repo doesn't allow it. 
-                // However, for a user request, we will try to implement a best-effort logic.
-                // Actually, client-side fetching of external HTML often fails due to CORS.
-                // A safer approach without a backend proxy is to blindly link to "latest" if we can't check.
-                // But the user specifically asked for "Today if exists, else Latest".
-                // Since we can't easily scrape on client due to CORS, we will try a different specific approach:
-                // We will assume standard naming convention validation is not possible without CORS.
-                // BUT, if the user allows, we can try to "ping" the predicted URL for today.
-                // Predicting the URL is hard because of the "bible book" part (e.g. /genesis/).
-                // So we MUST rely on parsing the index page.
+                today.setHours(0, 0, 0, 0);
 
                 const response = await fetch("https://raon-easypaster.github.io/daily/");
                 const text = await response.text();
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(text, "text/html");
 
-                // 1. Try to find a link with today's date
-                // The cards usually have the date in title or link
-                // Let's look for hrefs containing today's date string
-                const specificLink = doc.querySelector(`a[href*="${todayStr}"]`);
+                // Get all card links
+                const cardLinks = Array.from(doc.querySelectorAll("a.card"));
 
-                if (specificLink) {
-                    dailyLink = (specificLink as HTMLAnchorElement).href;
-                    // If relative URL, make it absolute
-                    if (!dailyLink.startsWith("http")) {
-                        dailyLink = new URL(dailyLink, "https://raon-easypaster.github.io/daily/").href;
+                // Extract dates and URLs
+                const posts = cardLinks.map(link => {
+                    const href = (link as HTMLAnchorElement).getAttribute("href");
+                    if (!href) return null;
+
+                    // Try to extract date from href (format YYYY-MM-DD)
+                    const match = href.match(/(\d{4}-\d{2}-\d{2})/);
+                    if (!match) return null;
+
+                    const dateStr = match[1];
+                    const date = new Date(dateStr);
+                    date.setHours(0, 0, 0, 0);
+
+                    let fullHref = href;
+                    if (!href.startsWith("http")) {
+                        fullHref = new URL(href, "https://raon-easypaster.github.io/daily/").href;
                     }
-                } else {
-                    // 2. Fallback to the first card (latest)
-                    const latestCard = doc.querySelector(".card");
-                    if (latestCard) {
-                        let latestHref = (latestCard as HTMLAnchorElement).getAttribute("href");
-                        if (latestHref) {
-                            if (!latestHref.startsWith("http")) {
-                                dailyLink = new URL(latestHref, "https://raon-easypaster.github.io/daily/").href;
-                            } else {
-                                dailyLink = latestHref;
-                            }
-                        }
-                    }
+
+                    return { href: fullHref, date: date };
+                }).filter(item => item !== null) as { href: string, date: Date }[];
+
+                // Sort posts by date descending
+                posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+                // Find the first post that is today or before today
+                const targetPost = posts.find(post => post.date <= today);
+
+                if (targetPost) {
+                    dailyLink = targetPost.href;
+                } else if (posts.length > 0) {
+                    // Fallback to the absolute latest if all posts are in the future (unlikely) or no match found
+                    dailyLink = posts[0].href;
                 }
             } catch (e) {
                 console.error("Failed to fetch daily index:", e);
