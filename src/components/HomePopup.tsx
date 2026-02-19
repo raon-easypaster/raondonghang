@@ -13,8 +13,8 @@ export default function HomePopup() {
     });
 
     useEffect(() => {
-        // Calculate dynamic links for Infographic and Weekly (Sunday based)
-        const calculateLinks = () => {
+        // Calculate dynamic links
+        const calculateLinks = async () => {
             const now = new Date();
             const dayCallback = now.getDay(); // 0 is Sunday
             const diff = now.getDate() - dayCallback; // Last Sunday
@@ -27,14 +27,69 @@ export default function HomePopup() {
 
             const dateStr = `${yy}${mm}${dd}`; // e.g. 260215
 
-            return {
+            let dailyLink = "https://raon-easypaster.github.io/daily/";
+
+            // Try to find today's daily meditation or fallback to latest
+            try {
+                const today = new Date();
+                const todayStr = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
+                // Fetch the daily index page
+                // Note: We use a simple fetch here. CORS might be an issue in dev, but GitHub Pages to GitHub Pages usually works or needs proxy.
+                // Since this runs on client, we might face CORS if the easy-paster repo doesn't allow it. 
+                // However, for a user request, we will try to implement a best-effort logic.
+                // Actually, client-side fetching of external HTML often fails due to CORS.
+                // A safer approach without a backend proxy is to blindly link to "latest" if we can't check.
+                // But the user specifically asked for "Today if exists, else Latest".
+                // Since we can't easily scrape on client due to CORS, we will try a different specific approach:
+                // We will assume standard naming convention validation is not possible without CORS.
+                // BUT, if the user allows, we can try to "ping" the predicted URL for today.
+                // Predicting the URL is hard because of the "bible book" part (e.g. /genesis/).
+                // So we MUST rely on parsing the index page.
+
+                const response = await fetch("https://raon-easypaster.github.io/daily/");
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, "text/html");
+
+                // 1. Try to find a link with today's date
+                // The cards usually have the date in title or link
+                // Let's look for hrefs containing today's date string
+                const specificLink = doc.querySelector(`a[href*="${todayStr}"]`);
+
+                if (specificLink) {
+                    dailyLink = (specificLink as HTMLAnchorElement).href;
+                    // If relative URL, make it absolute
+                    if (!dailyLink.startsWith("http")) {
+                        dailyLink = new URL(dailyLink, "https://raon-easypaster.github.io/daily/").href;
+                    }
+                } else {
+                    // 2. Fallback to the first card (latest)
+                    const latestCard = doc.querySelector(".card");
+                    if (latestCard) {
+                        let latestHref = (latestCard as HTMLAnchorElement).getAttribute("href");
+                        if (latestHref) {
+                            if (!latestHref.startsWith("http")) {
+                                dailyLink = new URL(latestHref, "https://raon-easypaster.github.io/daily/").href;
+                            } else {
+                                dailyLink = latestHref;
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to fetch daily index:", e);
+                // Fallback is already set to index page
+            }
+
+            setLinks({
                 infographic: `https://raon-easypaster.github.io/infographic/${yyyy}/${dateStr}info.html`,
                 weekly: `https://raon-easypaster.github.io/weekly/${yyyy}/${dateStr}daily.html`,
-                daily: "https://raon-easypaster.github.io/daily/"
-            };
+                daily: dailyLink
+            });
         };
 
-        setLinks(calculateLinks());
+        calculateLinks();
 
         // Check localStorage on mount
         const hideUntil = localStorage.getItem("popupHideUntil");
