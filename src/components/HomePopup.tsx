@@ -6,8 +6,36 @@ import Link from "next/link";
 export default function HomePopup() {
     const [isVisible, setIsVisible] = useState(false);
     const [dontShowToday, setDontShowToday] = useState(false);
+    const [links, setLinks] = useState({
+        infographic: "https://raon-easypaster.github.io/infographic/",
+        weekly: "https://raon-easypaster.github.io/weekly/",
+        daily: "https://raon-easypaster.github.io/daily/" // Daily URL structure is complex (bible book), linking to index for safety
+    });
 
     useEffect(() => {
+        // Calculate dynamic links for Infographic and Weekly (Sunday based)
+        const calculateLinks = () => {
+            const now = new Date();
+            const dayCallback = now.getDay(); // 0 is Sunday
+            const diff = now.getDate() - dayCallback; // Last Sunday
+            const lastSunday = new Date(now.setDate(diff));
+
+            const yyyy = lastSunday.getFullYear().toString();
+            const yy = yyyy.substring(2);
+            const mm = (lastSunday.getMonth() + 1).toString().padStart(2, '0');
+            const dd = lastSunday.getDate().toString().padStart(2, '0');
+
+            const dateStr = `${yy}${mm}${dd}`; // e.g. 260215
+
+            return {
+                infographic: `https://raon-easypaster.github.io/infographic/${yyyy}/${dateStr}info.html`,
+                weekly: `https://raon-easypaster.github.io/weekly/${yyyy}/${dateStr}daily.html`,
+                daily: "https://raon-easypaster.github.io/daily/"
+            };
+        };
+
+        setLinks(calculateLinks());
+
         // Check localStorage on mount
         const hideUntil = localStorage.getItem("popupHideUntil");
         if (hideUntil) {
@@ -38,14 +66,14 @@ export default function HomePopup() {
         <div className="popup-overlay">
             <div className="popup-content fade-up visible">
                 <div className="popup-header">
-                    <h3>최신 자료 바로가기</h3>
+                    <h3>주일 말씀을 되새겨요</h3>
                     <button onClick={handleClose} className="popup-close-btn">
                         ✕
                     </button>
                 </div>
                 <div className="popup-body">
                     <Link
-                        href="https://raon-easypaster.github.io/infographic/"
+                        href={links.infographic}
                         target="_blank"
                         className="popup-link-item"
                     >
@@ -53,20 +81,20 @@ export default function HomePopup() {
                         <span className="text">설교 인포그래픽 <small>최신자료</small></span>
                     </Link>
                     <Link
-                        href="https://raon-easypaster.github.io/weekly/"
+                        href={links.weekly}
                         target="_blank"
                         className="popup-link-item"
                     >
                         <span className="icon">📖</span>
-                        <span className="text">주간묵상집 <small>이번주 말씀</small></span>
+                        <span className="text">주간묵상집 <small>말씀이 삶이 되는 순간</small></span>
                     </Link>
                     <Link
-                        href="https://raon-easypaster.github.io/daily/"
+                        href={links.daily}
                         target="_blank"
                         className="popup-link-item"
                     >
                         <span className="icon">🙏</span>
-                        <span className="text">매일성경묵상 <small>오늘의 묵상</small></span>
+                        <span className="text">매일성경묵상 <small>말씀과 동행하는 삶</small></span>
                     </Link>
                 </div>
                 <div className="popup-footer">
