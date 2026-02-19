@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HomePopup from "@/components/HomePopup";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -34,6 +35,7 @@ export default function Home() {
 
   return (
     <main>
+      <HomePopup />
       {/* Hero Section */}
       <section
         className="hero"
