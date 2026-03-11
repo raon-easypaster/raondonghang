@@ -215,6 +215,28 @@ header {
     background: var(--accent-soft);
 }
 
+.btn-naver {
+    background: #03c75a;
+    color: white;
+    border: none;
+}
+
+.btn-naver:hover {
+    background: #02b350;
+    transform: translateY(-2px);
+}
+
+.btn-kakao {
+    background: #FEE500;
+    color: #191919;
+    border: none;
+}
+
+.btn-kakao:hover {
+    background: #f4dc00;
+    transform: translateY(-2px);
+}
+
 /* --------------------
    Sections
 -------------------- */

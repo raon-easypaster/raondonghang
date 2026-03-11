@@ -363,14 +363,14 @@ export default function Home() {
                 <a
                   href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%B6%80%EC%B2%9C%EC%8B%9C%20%EC%86%8C%EC%82%AC%EB%A1%9C%20203"
                   target="_blank"
-                  className="btn btn-secondary"
+                  className="btn btn-naver"
                 >
                   네이버 지도
                 </a>
                 <a
                   href="https://map.kakao.com/link/search/경기도 부천시 소사로 203"
                   target="_blank"
-                  className="btn btn-secondary"
+                  className="btn btn-kakao"
                 >
                   카카오맵
                 </a>
