@@ -741,10 +741,16 @@ footer {
 
     .menu-toggle {
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 18px;
+        cursor: pointer;
+        z-index: 101;
     }
 
     .menu-toggle.active span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
     }
 
     .menu-toggle.active span:nth-child(2) {
@@ -752,7 +758,7 @@ footer {
     }
 
     .menu-toggle.active span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
     }
 
     .section {
