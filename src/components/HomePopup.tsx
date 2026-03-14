@@ -19,34 +19,43 @@ export default function HomePopup() {
             let weeklyLink = "https://raon-easypaster.github.io/weekly/";
             let dailyLink = "https://raon-easypaster.github.io/daily/";
 
-            // Helper: fetch index page and return the first card's href
-            const getLatestCardLink = async (indexUrl: string): Promise<string | null> => {
+            // Helper: fetch archiveData.js and extract the first entry's URL
+            const getLatestFromArchiveData = async (
+                baseUrl: string,
+                urlField: string
+            ): Promise<string | null> => {
                 try {
-                    const response = await fetch(indexUrl);
+                    const response = await fetch(`${baseUrl}data/archiveData.js`);
                     const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, "text/html");
-                    const firstCard = doc.querySelector("a.card") as HTMLAnchorElement | null;
-                    if (!firstCard) return null;
-                    const href = firstCard.getAttribute("href");
-                    if (!href) return null;
-                    if (href.startsWith("http")) return href;
-                    return new URL(href, indexUrl).href;
+                    // Extract the JSON array from the JS file
+                    const match = text.match(/window\.ARCHIVE_DATA\s*=\s*(\[[\s\S]*?\]);/);
+                    if (!match) return null;
+                    const data = JSON.parse(match[1]);
+                    if (!Array.isArray(data) || data.length === 0) return null;
+                    const relUrl = data[0][urlField];
+                    if (!relUrl) return null;
+                    return `${baseUrl}${relUrl}`;
                 } catch (e) {
-                    console.error(`Failed to fetch ${indexUrl}:`, e);
+                    console.error(`Failed to fetch archiveData from ${baseUrl}:`, e);
                     return null;
                 }
             };
 
-            // 인포그래픽: fetch index and get latest card
-            const latestInfographic = await getLatestCardLink("https://raon-easypaster.github.io/infographic/");
+            // 인포그래픽: get latest from archiveData.js (field: relativeURL)
+            const latestInfographic = await getLatestFromArchiveData(
+                "https://raon-easypaster.github.io/infographic/",
+                "relativeURL"
+            );
             if (latestInfographic) infographicLink = latestInfographic;
 
-            // 주간묵상집: fetch index and get latest card
-            const latestWeekly = await getLatestCardLink("https://raon-easypaster.github.io/weekly/");
+            // 주간묵상집: get latest from archiveData.js (field: url)
+            const latestWeekly = await getLatestFromArchiveData(
+                "https://raon-easypaster.github.io/weekly/",
+                "url"
+            );
             if (latestWeekly) weeklyLink = latestWeekly;
 
-            // 매일성경묵상: find closest past date
+            // 매일성경묵상: find closest past date from index page cards
             try {
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
