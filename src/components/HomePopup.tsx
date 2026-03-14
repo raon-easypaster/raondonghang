@@ -15,21 +15,38 @@ export default function HomePopup() {
     useEffect(() => {
         // Calculate dynamic links
         const calculateLinks = async () => {
-            const now = new Date();
-            const dayCallback = now.getDay(); // 0 is Sunday
-            const diff = now.getDate() - dayCallback; // Last Sunday
-            const lastSunday = new Date(now.setDate(diff));
-
-            const yyyy = lastSunday.getFullYear().toString();
-            const yy = yyyy.substring(2);
-            const mm = (lastSunday.getMonth() + 1).toString().padStart(2, '0');
-            const dd = lastSunday.getDate().toString().padStart(2, '0');
-
-            const dateStr = `${yy}${mm}${dd}`; // e.g. 260215
-
+            let infographicLink = "https://raon-easypaster.github.io/infographic/";
+            let weeklyLink = "https://raon-easypaster.github.io/weekly/";
             let dailyLink = "https://raon-easypaster.github.io/daily/";
 
-            // Try to find today's daily meditation or fallback to closest past date
+            // Helper: fetch index page and return the first card's href
+            const getLatestCardLink = async (indexUrl: string): Promise<string | null> => {
+                try {
+                    const response = await fetch(indexUrl);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, "text/html");
+                    const firstCard = doc.querySelector("a.card") as HTMLAnchorElement | null;
+                    if (!firstCard) return null;
+                    const href = firstCard.getAttribute("href");
+                    if (!href) return null;
+                    if (href.startsWith("http")) return href;
+                    return new URL(href, indexUrl).href;
+                } catch (e) {
+                    console.error(`Failed to fetch ${indexUrl}:`, e);
+                    return null;
+                }
+            };
+
+            // 인포그래픽: fetch index and get latest card
+            const latestInfographic = await getLatestCardLink("https://raon-easypaster.github.io/infographic/");
+            if (latestInfographic) infographicLink = latestInfographic;
+
+            // 주간묵상집: fetch index and get latest card
+            const latestWeekly = await getLatestCardLink("https://raon-easypaster.github.io/weekly/");
+            if (latestWeekly) weeklyLink = latestWeekly;
+
+            // 매일성경묵상: find closest past date
             try {
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
@@ -39,50 +56,32 @@ export default function HomePopup() {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(text, "text/html");
 
-                // Get all card links
                 const cardLinks = Array.from(doc.querySelectorAll("a.card"));
-
-                // Extract dates and URLs
                 const posts = cardLinks.map(link => {
                     const href = (link as HTMLAnchorElement).getAttribute("href");
                     if (!href) return null;
-
-                    // Try to extract date from href (format YYYY-MM-DD)
                     const match = href.match(/(\d{4}-\d{2}-\d{2})/);
                     if (!match) return null;
-
-                    const dateStr = match[1];
-                    const date = new Date(dateStr);
+                    const date = new Date(match[1]);
                     date.setHours(0, 0, 0, 0);
-
-                    let fullHref = href;
-                    if (!href.startsWith("http")) {
-                        fullHref = new URL(href, "https://raon-easypaster.github.io/daily/").href;
-                    }
-
-                    return { href: fullHref, date: date };
+                    const fullHref = href.startsWith("http") ? href : new URL(href, "https://raon-easypaster.github.io/daily/").href;
+                    return { href: fullHref, date };
                 }).filter(item => item !== null) as { href: string, date: Date }[];
 
-                // Sort posts by date descending
                 posts.sort((a, b) => b.date.getTime() - a.date.getTime());
-
-                // Find the first post that is today or before today
                 const targetPost = posts.find(post => post.date <= today);
-
                 if (targetPost) {
                     dailyLink = targetPost.href;
                 } else if (posts.length > 0) {
-                    // Fallback to the absolute latest if all posts are in the future (unlikely) or no match found
                     dailyLink = posts[0].href;
                 }
             } catch (e) {
                 console.error("Failed to fetch daily index:", e);
-                // Fallback is already set to index page
             }
 
             setLinks({
-                infographic: `https://raon-easypaster.github.io/infographic/${yyyy}/${dateStr}info.html`,
-                weekly: `https://raon-easypaster.github.io/weekly/${yyyy}/${dateStr}daily.html`,
+                infographic: infographicLink,
+                weekly: weeklyLink,
                 daily: dailyLink
             });
         };
