@@ -9,7 +9,8 @@ export default function HomePopup() {
     const [links, setLinks] = useState({
         infographic: "https://raon-easypaster.github.io/infographic/",
         weekly: "https://raon-easypaster.github.io/weekly/",
-        daily: "https://raon-easypaster.github.io/daily/" // Daily URL structure is complex (bible book), linking to index for safety
+        daily: "https://raon-easypaster.github.io/daily/", // Daily URL structure is complex (bible book), linking to index for safety
+        share: "https://raon-easypaster.github.io/share/"
     });
 
     useEffect(() => {
@@ -18,6 +19,7 @@ export default function HomePopup() {
             let infographicLink = "https://raon-easypaster.github.io/infographic/";
             let weeklyLink = "https://raon-easypaster.github.io/weekly/";
             let dailyLink = "https://raon-easypaster.github.io/daily/";
+            let shareLink = "https://raon-easypaster.github.io/share/";
 
             // Helper: fetch archiveData.js and extract the first entry's URL
             const getLatestFromArchiveData = async (
@@ -91,7 +93,8 @@ export default function HomePopup() {
             setLinks({
                 infographic: infographicLink,
                 weekly: weeklyLink,
-                daily: dailyLink
+                daily: dailyLink,
+                share: shareLink
             });
         };
 
@@ -156,6 +159,14 @@ export default function HomePopup() {
                     >
                         <span className="icon">🙏</span>
                         <span className="text">매일성경묵상 <small>말씀과 동행하는 삶</small></span>
+                    </Link>
+                    <Link
+                        href={links.share}
+                        target="_blank"
+                        className="popup-link-item"
+                    >
+                        <span className="icon">🤝</span>
+                        <span className="text">소그룹나눔 <small>삶을 나누는 시간</small></span>
                     </Link>
                 </div>
                 <div className="popup-footer">

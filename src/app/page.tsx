@@ -198,6 +198,14 @@ export default function Home() {
               <h3>교회 서식 관련 자료 →</h3>
               <p>교회 생활에 필요한 다양한 서식과 행정 자료실입니다.</p>
             </a>
+            <a
+              href="https://raon-easypaster.github.io/share/"
+              target="_blank"
+              className="archive-card"
+            >
+              <h3>소그룹 나눔지 →</h3>
+              <p>소그룹에서 함께 삶과 말씀을 나누기 위한 자료입니다.</p>
+            </a>
           </div>
         </div>
       </section>
