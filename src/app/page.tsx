@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import HomePopup from "@/components/HomePopup";
+import { getBlogPosts, BlogPost } from "./actions";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
+    // Fetch blog posts
+    getBlogPosts().then(setBlogPosts);
     const fadeElements = document.querySelectorAll(".fade-up");
 
     observerRef.current = new IntersectionObserver(
@@ -161,6 +164,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Calendar Section */}
+      <section className="section" id="calendar">
+        <div className="container fade-up">
+          <h2 className="section-title">라온 사역 일정</h2>
+          <p className="section-intro" style={{ marginBottom: "40px" }}>
+            성도님들과 함께 만들어가는 교회의 여러 일정들입니다.
+          </p>
+          <div className="calendar-container" style={{ position: "relative", paddingBottom: "75%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+            <iframe 
+              src="https://calendar.google.com/calendar/embed?src=ko.south_korea%23holiday%40group.v.calendar.google.com&ctz=Asia%2FSeoul" 
+              style={{ border: 0, position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} 
+              frameBorder="0" 
+              scrolling="no"
+            ></iframe>
+          </div>
+          <p style={{ textAlign: "center", marginTop: "16px", fontSize: "0.9rem", color: "var(--gray)" }}>
+            (현재 임시 캘린더가 연결되어 있습니다. 관리자님이 캘린더 아이디를 알려주시면 바로 교회 일정으로 변경됩니다.)
+          </p>
+        </div>
+      </section>
+
       {/* Archive Section */}
       <section className="section" id="archive">
         <div className="container fade-up">
@@ -205,6 +229,48 @@ export default function Home() {
             >
               <h3>소그룹 나눔지 →</h3>
               <p>소그룹에서 함께 삶과 말씀을 나누기 위한 자료입니다.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="section" id="blog" style={{ backgroundColor: "var(--bg-light)" }}>
+        <div className="container fade-up">
+          <h2 className="section-title">쉬운목사의 목양칼럼</h2>
+          <p className="section-intro" style={{ marginBottom: "48px" }}>
+            말씀을 쉽게 가르치는 하나님이 쓰기 쉬운 이광복 목사님의 이야기입니다.
+          </p>
+
+          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
+            {blogPosts.map((post, index) => (
+              <a href={post.link} target="_blank" rel="noopener noreferrer" key={index} className="blog-card" style={{
+                backgroundColor: "white",
+                padding: "32px",
+                borderRadius: "16px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                textDecoration: "none",
+                color: "inherit",
+                display: "flex",
+                flexDirection: "column",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease"
+              }}>
+                <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
+                  {post.title}
+                </h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1 }}>
+                  {post.description}
+                </p>
+                <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
+                  {post.pubDate}
+                </span>
+              </a>
+            ))}
+          </div>
+          
+          <div style={{ textAlign: "center", marginTop: "48px" }}>
+            <a href="https://blog.naver.com/galeb76" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ backgroundColor: "#03c75a", color: "white", borderColor: "#03c75a" }}>
+              네이버 블로그 전체 보기 →
             </a>
           </div>
         </div>
@@ -382,6 +448,27 @@ export default function Home() {
                 >
                   카카오맵
                 </a>
+              </div>
+            </div>
+
+            {/* Offering Info */}
+            <div className="offering-info" style={{ marginTop: "40px", padding: "30px", backgroundColor: "white", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "16px", color: "var(--text-main)" }}>온라인 헌금 안내</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px", padding: "20px", backgroundColor: "var(--bg-light)", borderRadius: "12px" }}>
+                <div>
+                  <p style={{ fontWeight: "600", fontSize: "1.1rem", marginBottom: "4px" }}>국민은행 <span id="account-number" style={{ color: "var(--accent-dark)" }}>238501-04-288321</span></p>
+                  <p style={{ fontSize: "0.95rem", color: "var(--gray)" }}>예금주: 기독교대한성결교회라온동행교회</p>
+                </div>
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText("238501-04-288321");
+                    alert("계좌번호가 복사되었습니다.");
+                  }}
+                  className="btn btn-primary" 
+                  style={{ padding: "10px 20px", fontSize: "0.95rem", whiteSpace: "nowrap" }}
+                >
+                  계좌번호 복사하기
+                </button>
               </div>
             </div>
           </div>
