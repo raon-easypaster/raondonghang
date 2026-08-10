@@ -416,6 +416,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Calendar Section */}
+      <section className="section" id="calendar" style={{ backgroundColor: "var(--bg-light)" }}>
+        <div className="container fade-up">
+          <h2 className="section-title">라온 사역 일정</h2>
+          <p className="section-intro" style={{ marginBottom: "40px" }}>
+            성도님들과 함께 만들어가는 교회의 여러 일정들입니다.
+          </p>
+          <div className="calendar-container" style={{ position: "relative", paddingBottom: "75%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+            <iframe 
+              src="https://calendar.google.com/calendar/embed?src=08tpgtnil0i5vpogtgo9f81p7g@group.calendar.google.com&ctz=Asia%2FSeoul" 
+              style={{ border: 0, position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} 
+              frameBorder="0" 
+              scrolling="no"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
 
       {/* Contact Section */}
       <section
