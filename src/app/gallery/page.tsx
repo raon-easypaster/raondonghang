@@ -11,6 +11,7 @@ type DriveFile = {
   mimeType: string;
   thumbnailLink?: string;
   webContentLink?: string;
+  webViewLink?: string;
 };
 
 async function getPhotos(): Promise<DriveFile[]> {
@@ -19,11 +20,11 @@ async function getPhotos(): Promise<DriveFile[]> {
     throw new Error("GOOGLE_API_KEY is not defined.");
   }
 
-  // Fetch images from the specific Google Drive folder
-  const query = `'${FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`;
+  // Fetch images and videos from the specific Google Drive folder
+  const query = `'${FOLDER_ID}' in parents and (mimeType contains 'image/' or mimeType contains 'video/') and trashed = false`;
   const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(
     query
-  )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink)&orderBy=createdTime desc&pageSize=100`;
+  )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink,webViewLink)&orderBy=createdTime desc&pageSize=100`;
 
   const res = await fetch(url, { next: { revalidate: 60 } });
 
@@ -77,11 +78,13 @@ export default async function GalleryPage() {
             {photos.map((photo) => {
               // Increase thumbnail quality by replacing =s220 with =s1000
               const highResUrl = photo.thumbnailLink ? photo.thumbnailLink.replace(/=s\d+/, "=s1000") : "";
+              const isVideo = photo.mimeType.startsWith("video/");
+              const targetUrl = isVideo && photo.webViewLink ? photo.webViewLink : highResUrl;
               
               return (
                 <div key={photo.id} className="gallery-item">
                   {highResUrl ? (
-                    <a href={highResUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={targetUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
                       <img
                         src={highResUrl}
                         alt={photo.name}
@@ -89,9 +92,16 @@ export default async function GalleryPage() {
                         loading="lazy"
                         referrerPolicy="no-referrer"
                       />
+                      {isVideo && (
+                        <div className="video-overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.3)' }}>
+                          <svg width="64" height="64" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5V19L19 12L8 5Z" />
+                          </svg>
+                        </div>
+                      )}
                     </a>
                   ) : (
-                    <div className="gallery-placeholder">이미지 없음</div>
+                    <div className="gallery-placeholder">미리보기 없음</div>
                   )}
                 </div>
               );
