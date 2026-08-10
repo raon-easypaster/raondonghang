@@ -451,7 +451,7 @@ export default function Home() {
               <div className="info-item">
                 <span className="label">주소</span>
                 <span className="value">
-                  경기도 부천시 소사로 203 2층 (카페 라온트리)
+                  경기도 부천시 소삼로36번길 6 2층 (카페 라온트리)
                 </span>
               </div>
               <div className="info-item">
@@ -467,14 +467,14 @@ export default function Home() {
 
               <div className="map-btns">
                 <a
-                  href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%B6%80%EC%B2%9C%EC%8B%9C%20%EC%86%8C%EC%82%AC%EB%A1%9C%20203"
+                  href="https://map.naver.com/v5/search/경기도 부천시 소삼로36번길 6"
                   target="_blank"
                   className="btn btn-naver"
                 >
                   네이버 지도
                 </a>
                 <a
-                  href="https://map.kakao.com/link/search/경기도 부천시 소사로 203"
+                  href="https://map.kakao.com/link/search/경기도 부천시 소삼로36번길 6"
                   target="_blank"
                   className="btn btn-kakao"
                 >
