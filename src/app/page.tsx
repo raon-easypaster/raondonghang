@@ -457,7 +457,7 @@ export default function Home() {
               <div className="info-item">
                 <span className="label">교통편</span>
                 <span className="value">
-                  소사역(1호선/서해선) 도보 10분, 소사초등학교 앞 하차
+                  전철: 소사역(1호선/서해선) 도보 5분, 버스: 소사종합시장 하차
                 </span>
               </div>
               <div className="info-item">
