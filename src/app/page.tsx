@@ -164,23 +164,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Calendar Section */}
-      <section className="section" id="calendar">
-        <div className="container fade-up">
-          <h2 className="section-title">라온 사역 일정</h2>
-          <p className="section-intro" style={{ marginBottom: "40px" }}>
-            성도님들과 함께 만들어가는 교회의 여러 일정들입니다.
-          </p>
-          <div className="calendar-container" style={{ position: "relative", paddingBottom: "75%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
-            <iframe 
-              src="https://calendar.google.com/calendar/embed?src=08tpgtnil0i5vpogtgo9f81p7g@group.calendar.google.com&ctz=Asia%2FSeoul" 
-              style={{ border: 0, position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} 
-              frameBorder="0" 
-              scrolling="no"
-            ></iframe>
-          </div>
-        </div>
-      </section>
+
 
       {/* Archive Section */}
       <section className="section" id="archive">
@@ -239,30 +223,62 @@ export default function Home() {
             말씀을 쉽게 가르치는 하나님이 쓰기 쉬운 이광복 목사님의 이야기입니다.
           </p>
 
-          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-            {blogPosts.map((post, index) => (
-              <a href={post.link} target="_blank" rel="noopener noreferrer" key={index} className="blog-card" style={{
-                backgroundColor: "white",
-                padding: "32px",
-                borderRadius: "16px",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-                textDecoration: "none",
-                color: "inherit",
-                display: "flex",
-                flexDirection: "column",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease"
-              }}>
-                <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
-                  {post.title}
-                </h3>
-                <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1 }}>
-                  {post.description}
-                </p>
-                <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
-                  {post.pubDate}
-                </span>
-              </a>
-            ))}
+          <div className="blog-container" style={{ display: "flex", flexWrap: "wrap", gap: "24px" }}>
+            {/* Main Post Card */}
+            {blogPosts.length > 0 && (
+              <div style={{ flex: "1 1 300px", minWidth: "300px" }}>
+                <a href={blogPosts[0].link} target="_blank" rel="noopener noreferrer" className="blog-card" style={{
+                  backgroundColor: "white",
+                  padding: "32px",
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease"
+                }}>
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
+                    {blogPosts[0].title}
+                  </h3>
+                  <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1 }}>
+                    {blogPosts[0].description}
+                  </p>
+                  <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
+                    {blogPosts[0].pubDate}
+                  </span>
+                </a>
+              </div>
+            )}
+            
+            {/* List of other posts */}
+            {blogPosts.length > 1 && (
+              <div style={{ flex: "1 1 300px", minWidth: "300px", display: "flex", flexDirection: "column", gap: "12px", justifyContent: "space-between" }}>
+                {blogPosts.slice(1).map((post, index) => (
+                  <a href={post.link} target="_blank" rel="noopener noreferrer" key={index} style={{
+                    backgroundColor: "white",
+                    padding: "16px 20px",
+                    borderRadius: "12px",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
+                    textDecoration: "none",
+                    color: "inherit",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    flex: 1,
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease"
+                  }} className="blog-list-item">
+                    <h4 style={{ fontSize: "1.05rem", fontWeight: "600", marginBottom: "6px", color: "var(--text-main)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {post.title}
+                    </h4>
+                    <span style={{ fontSize: "0.8rem", color: "var(--gray)" }}>
+                      {post.pubDate}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
           
           <div style={{ textAlign: "center", marginTop: "48px" }}>
@@ -399,6 +415,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Contact Section */}
       <section

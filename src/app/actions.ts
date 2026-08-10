@@ -20,7 +20,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     const feed = await parser.parseURL("https://rss.blog.naver.com/galeb76.xml");
     
     // 네이버 블로그 RSS는 description에 너무 많은 내용이 들어갈 수 있으므로 정제
-    return feed.items.slice(0, 3).map((item) => {
+    return feed.items.slice(0, 6).map((item) => {
       // description에서 html 태그나 이미지 태그 등을 제거하고 순수 텍스트만 추출
       let plainText = item.description || "";
       plainText = plainText.replace(/<[^>]+>/g, ""); // HTML 태그 제거
