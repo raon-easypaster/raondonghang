@@ -25,7 +25,7 @@ async function getPhotos(): Promise<DriveFile[]> {
     query
   )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink)&orderBy=createdTime desc&pageSize=100`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { next: { revalidate: 60 } });
 
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
@@ -87,6 +87,7 @@ export default async function GalleryPage() {
                         alt={photo.name}
                         className="gallery-image"
                         loading="lazy"
+                        referrerPolicy="no-referrer"
                       />
                     </a>
                   ) : (
