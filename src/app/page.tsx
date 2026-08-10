@@ -173,15 +173,12 @@ export default function Home() {
           </p>
           <div className="calendar-container" style={{ position: "relative", paddingBottom: "75%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
             <iframe 
-              src="https://calendar.google.com/calendar/embed?src=ko.south_korea%23holiday%40group.v.calendar.google.com&ctz=Asia%2FSeoul" 
+              src="https://calendar.google.com/calendar/embed?src=08tpgtnil0i5vpogtgo9f81p7g@group.calendar.google.com&ctz=Asia%2FSeoul" 
               style={{ border: 0, position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} 
               frameBorder="0" 
               scrolling="no"
             ></iframe>
           </div>
-          <p style={{ textAlign: "center", marginTop: "16px", fontSize: "0.9rem", color: "var(--gray)" }}>
-            (현재 임시 캘린더가 연결되어 있습니다. 관리자님이 캘린더 아이디를 알려주시면 바로 교회 일정으로 변경됩니다.)
-          </p>
         </div>
       </section>
 
