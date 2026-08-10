@@ -108,7 +108,7 @@ export default async function BulletinPage({
                           key={img.id}
                           src={highResUrl} 
                           alt={img.name}
-                          style={{ maxWidth: "100%", height: "auto", borderRadius: "8px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)" }}
+                          style={{ maxWidth: "100%", maxHeight: "85vh", width: "auto", objectFit: "contain", borderRadius: "8px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)" }}
                           referrerPolicy="no-referrer"
                         />
                       );
