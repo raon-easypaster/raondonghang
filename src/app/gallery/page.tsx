@@ -81,6 +81,9 @@ export default async function GalleryPage() {
               const isVideo = photo.mimeType.startsWith("video/");
               const targetUrl = isVideo && photo.webViewLink ? photo.webViewLink : highResUrl;
               
+              // Remove file extension (e.g. .jpg, .mp4) for a cleaner display
+              const displayName = photo.name.replace(/\.[^/.]+$/, "");
+              
               return (
                 <div key={photo.id} className="gallery-item">
                   {highResUrl ? (
@@ -99,6 +102,23 @@ export default async function GalleryPage() {
                           </svg>
                         </div>
                       )}
+                      <div className="gallery-caption" style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: '24px 16px 12px',
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
+                        color: 'white',
+                        fontSize: '0.95rem',
+                        fontWeight: '500',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        pointerEvents: 'none'
+                      }}>
+                        {displayName}
+                      </div>
                     </a>
                   ) : (
                     <div className="gallery-placeholder">미리보기 없음</div>
