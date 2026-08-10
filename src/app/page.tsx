@@ -148,8 +148,8 @@ export default function Home() {
             </div>
 
             <div className="worship-card">
-              <span className="time">매주 금요일 저녁 07:00</span>
-              <h3>금요 기도회</h3>
+              <span className="time">매주 토요일 저녁 06:00</span>
+              <h3>토요기도회</h3>
               <p className="location">카페 라온트리</p>
               <p
                 className="about-paragraph"
