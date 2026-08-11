@@ -34,7 +34,7 @@ export default function Header() {
             <nav className="navbar">
                 <div className="container">
                     <Link href="/" className="logo" onClick={closeMenu}>
-                        <Image src="/logo.png" alt="라온동행교회 로고" width={48} height={48} className="logo-img" />
+                        <Image src="/logo-new.png" alt="라온동행교회 로고" width={90} height={60} className="logo-img" style={{ objectFit: "contain" }} />
                         <h1><span>기독교 대한성결교회</span>라온동행교회</h1>
                     </Link>
 
