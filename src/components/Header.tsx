@@ -51,6 +51,7 @@ export default function Header() {
                         <li><Link href="/#worship" onClick={closeMenu}>예배안내</Link></li>
                         <li><Link href="/#archive" onClick={closeMenu}>자료실</Link></li>
                         <li><Link href="/#contact" onClick={closeMenu}>오시는길</Link></li>
+                        <li><Link href="/logo" onClick={closeMenu}>로고소개</Link></li>
                         <li><Link href="/notice" onClick={closeMenu}>교회소식</Link></li>
                         <li><Link href="/bulletin" onClick={closeMenu}>주보</Link></li>
                         <li><Link href="/gallery" onClick={closeMenu}>사진첩</Link></li>
