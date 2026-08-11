@@ -49,11 +49,10 @@ async function getImages(folderId: string): Promise<DriveFile[]> {
   return data.files || [];
 }
 
-export default async function BulletinPage({
-  searchParams,
-}: {
-  searchParams: { folder?: string };
+export default async function BulletinPage(props: {
+  searchParams: Promise<{ folder?: string }>;
 }) {
+  const searchParams = await props.searchParams;
   const folders = await getFolders();
   
   // URL 쿼리에 folder가 있으면 그 폴더를, 없으면 가장 첫 번째(최신) 폴더를 선택
