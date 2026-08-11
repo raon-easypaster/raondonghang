@@ -242,7 +242,7 @@ export default function Home() {
                   <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
                     {blogPosts[0].title}
                   </h3>
-                  <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1, whiteSpace: "pre-wrap" }}>
+                  <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1, whiteSpace: "pre-wrap", display: "-webkit-box", WebkitLineClamp: 12, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                     {blogPosts[0].description}
                   </p>
                   <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
