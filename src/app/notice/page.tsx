@@ -40,7 +40,7 @@ export default async function NoticePage() {
                                 <h3 style={{ fontSize: "1.1rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
                                     {notice.title}
                                 </h3>
-                                <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1 }}>
+                                <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1, whiteSpace: "pre-wrap" }}>
                                     {notice.description}
                                 </p>
                                 <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
