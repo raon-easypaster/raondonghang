@@ -218,7 +218,7 @@ export default function Home() {
       {/* Blog Section */}
       <section className="section" id="blog" style={{ backgroundColor: "var(--bg-light)" }}>
         <div className="container fade-up">
-          <h2 className="section-title">쉬운목사의 목양칼럼</h2>
+          <h2 className="section-title">쉬운목사의 즐거운 묵상나눔</h2>
           <p className="section-intro" style={{ marginBottom: "48px" }}>
             말씀을 쉽게 가르치는 하나님이 쓰기 쉬운 이광복 목사님의 이야기입니다.
           </p>

@@ -35,11 +35,15 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       // 나머지 HTML 태그 제거
       plainText = plainText.replace(/<[^>]+>/g, ""); 
       plainText = plainText.replace(/&nbsp;/g, " ");
-      plainText = plainText.replace(/\n\s*\n/g, "\n").trim();
       
-      // 글자수 제한 (500자) - 메인 화면 카드를 꽉 채우기 위해 넉넉하게 설정
-      if (plainText.length > 500) {
-        plainText = plainText.substring(0, 500) + "...";
+      // 네이버 RSS 글 줄바꿈 복원 휴리스틱 (문장 끝 맺음말 뒤에 줄바꿈 추가)
+      plainText = plainText.replace(/([다요까죠시오][\.!\?])\s+/g, "$1\n\n");
+      
+      plainText = plainText.replace(/\n\s*\n/g, "\n\n").trim();
+      
+      // 글자수 제한 (800자) - 메인 화면 카드를 꽉 채우기 위해 넉넉하게 설정
+      if (plainText.length > 800) {
+        plainText = plainText.substring(0, 800) + "...";
       }
 
       return {
