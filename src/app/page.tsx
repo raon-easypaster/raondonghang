@@ -228,7 +228,8 @@ export default function Home() {
             {blogPosts.length > 0 && (
               <div style={{ flex: "1 1 300px", minWidth: "300px" }}>
                 <a href={blogPosts[0].link} target="_blank" rel="noopener noreferrer" className="blog-card" style={{
-                  backgroundColor: "white",
+                  backgroundColor: "#fffbeb",
+                  border: "1px solid #fef3c7",
                   padding: "32px",
                   borderRadius: "16px",
                   boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
