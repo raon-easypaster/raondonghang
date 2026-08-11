@@ -1,74 +1,52 @@
-import { sql } from "@vercel/postgres";
 import Link from "next/link";
-import NoticeActions from "@/components/NoticeActions";
+import { getNoticePosts } from "@/app/actions";
 
 // Force dynamic rendering so we always get the latest notices
 export const dynamic = "force-dynamic";
 
 export default async function NoticePage() {
-    let notices: any[] = [];
-    let error: string | null = null;
-
-    try {
-        // Attempt to fetch notices
-        // This will fail if the table doesn't exist or DB is not connected
-        const result = await sql`SELECT * FROM notices ORDER BY created_at DESC`;
-        notices = result.rows;
-    } catch (e) {
-        console.error("Database Error:", e);
-        // If table doesn't exist, we might treat it as empty list but log error
-        error = "데이터베이스 연결이 설정되지 않았거나 'notices' 테이블이 없습니다.";
-    }
+    const notices = await getNoticePosts();
 
     return (
         <main className="container" style={{ paddingTop: "120px", paddingBottom: "80px", minHeight: "80vh" }}>
             <div className="fade-up visible">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px" }}>
                     <h1 className="section-title" style={{ marginBottom: 0 }}>교회소식</h1>
-
-                    {/* 임시 글쓰기 버튼 (나중에 권한 처리 필요) */}
-                    <Link href="/notice/write" className="btn btn-secondary" style={{ fontSize: "0.9rem", padding: "10px 20px" }}>
-                        글쓰기
-                    </Link>
+                    
+                    <a href="https://blog.naver.com/galeb76" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: "0.9rem", padding: "10px 20px" }}>
+                        블로그 바로가기
+                    </a>
                 </div>
 
-                {error ? (
-                    <div style={{ padding: "40px", backgroundColor: "#fff5f5", borderRadius: "12px", color: "#e53e3e" }}>
-                        <h3 style={{ marginBottom: "12px" }}>시스템 메시지</h3>
-                        <p>{error}</p>
-                        <p style={{ marginTop: "12px", fontSize: "0.9rem", color: "#666" }}>
-                            * Vercel 대시보드에서 Postgres 데이터베이스를 연결하고 Schema를 생성해주세요.
-                        </p>
-                    </div>
-                ) : notices.length === 0 ? (
+                {notices.length === 0 ? (
                     <div style={{ textAlign: "center", padding: "80px 0", color: "var(--gray-500)" }}>
-                        등록된 소식이 없습니다.
+                        <p style={{ marginBottom: "16px" }}>등록된 교회소식이 없습니다.</p>
+                        <p style={{ fontSize: "0.9rem", color: "var(--gray-400)" }}>* 네이버 블로그에 '교회소식' 카테고리로 글을 작성하시면 이곳에 자동으로 나타납니다.</p>
                     </div>
                 ) : (
-                    <div className="notice-list">
-                        {notices.map((notice) => (
-                            <div key={notice.id} className="notice-item" style={{
-                                padding: "24px 0",
-                                borderBottom: "1px solid rgba(0,0,0,0.06)",
+                    <div className="notice-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
+                        {notices.map((notice, index) => (
+                            <a href={notice.link} target="_blank" rel="noopener noreferrer" key={index} className="blog-card" style={{
+                                backgroundColor: "white",
+                                padding: "24px",
+                                borderRadius: "16px",
+                                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                                textDecoration: "none",
+                                color: "inherit",
                                 display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center"
+                                flexDirection: "column",
+                                transition: "transform 0.3s ease, box-shadow 0.3s ease"
                             }}>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                                        <h3 style={{ fontSize: "1.2rem", fontWeight: 600, marginBottom: "8px" }}>
-                                            {notice.title}
-                                        </h3>
-                                        <NoticeActions id={notice.id} />
-                                    </div>
-                                    <p style={{ fontSize: "0.95rem", color: "var(--gray-700)", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                                        {notice.content}
-                                    </p>
-                                    <span style={{ fontSize: "0.85rem", color: "var(--gray-500)", marginTop: "8px", display: "inline-block" }}>
-                                        {new Date(notice.created_at).toLocaleDateString("ko-KR")}
-                                    </span>
-                                </div>
-                            </div>
+                                <h3 style={{ fontSize: "1.1rem", fontWeight: "700", marginBottom: "12px", color: "var(--text-main)" }}>
+                                    {notice.title}
+                                </h3>
+                                <p style={{ fontSize: "0.95rem", color: "var(--gray)", lineHeight: "1.6", marginBottom: "20px", flexGrow: 1 }}>
+                                    {notice.description}
+                                </p>
+                                <span style={{ fontSize: "0.85rem", color: "var(--accent-mid)", fontWeight: "600" }}>
+                                    {notice.pubDate}
+                                </span>
+                            </a>
                         ))}
                     </div>
                 )}
