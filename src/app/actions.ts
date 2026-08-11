@@ -19,8 +19,13 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const feed = await parser.parseURL("https://rss.blog.naver.com/galeb76.xml");
     
-    // 네이버 블로그 RSS는 description에 너무 많은 내용이 들어갈 수 있으므로 정제
-    return feed.items.slice(0, 6).map((item) => {
+    // "즐거운 묵상나눔" 카테고리만 필터링
+    const blogItems = feed.items.filter(item => {
+      const cats = item.categories || [];
+      return cats.some(c => c.includes("즐거운 묵상나눔") || c.includes("즐거운묵상나눔") || c.includes("묵상나눔"));
+    });
+    
+    return blogItems.slice(0, 6).map((item) => {
       // description에서 html 태그나 이미지 태그 등을 제거하고 순수 텍스트만 추출
       let plainText = item.description || "";
       // <br>, </p>, </div> 태그를 줄바꿈(\n)으로 변환
@@ -54,10 +59,10 @@ export async function getNoticePosts(): Promise<BlogPost[]> {
   try {
     const feed = await parser.parseURL("https://rss.blog.naver.com/galeb76.xml");
     
-    // 교회소식 카테고리만 필터링 (Naver RSS는 categories 배열을 제공)
+    // "라온동행(교회) 교회소식" 카테고리만 필터링 (Naver RSS는 categories 배열을 제공)
     const noticeItems = feed.items.filter(item => {
       const cats = item.categories || [];
-      return cats.some(c => c.includes("교회소식") || c.includes("교회 소식"));
+      return cats.some(c => c.includes("라온동행교회 교회소식") || c.includes("라온동행 교회소식") || c.includes("교회소식"));
     });
 
     return noticeItems.map((item) => {
