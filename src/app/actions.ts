@@ -67,7 +67,7 @@ export async function getNoticePosts(): Promise<BlogPost[]> {
 
     return noticeItems.map((item) => {
       let plainText = item.description || "";
-      // <br>, </p>, </div> 태그를 줄바꿈(\n)으로 변환
+      // <br>, </p>, </div> 태그를 줄바꿈(\n)으로 변환 (혹시나 HTML이 들어올 경우를 대비)
       plainText = plainText.replace(/<br\s*\/?>/gi, "\n");
       plainText = plainText.replace(/<\/p>/gi, "\n");
       plainText = plainText.replace(/<\/div>/gi, "\n");
@@ -75,8 +75,12 @@ export async function getNoticePosts(): Promise<BlogPost[]> {
       plainText = plainText.replace(/<[^>]+>/g, ""); 
       plainText = plainText.replace(/&nbsp;/g, " "); 
       
+      // 네이버 블로그 RSS는 기본적으로 모든 줄바꿈을 없애버리고 한 줄로 만듭니다.
+      // 따라서 숫자(예: "2. ", "3. ")가 시작되는 부분에서 강제로 줄바꿈을 추가하여 보기 좋게 만듭니다.
+      plainText = plainText.replace(/(\d+\.\s)/g, "\n\n$1");
+      
       // 여러 개의 연속된 줄바꿈을 최대 2개로 압축하고 앞뒤 공백 제거
-      plainText = plainText.replace(/\n\s*\n/g, "\n").trim();
+      plainText = plainText.replace(/\n\s*\n/g, "\n\n").trim();
 
       return {
         title: item.title || "제목 없음",
