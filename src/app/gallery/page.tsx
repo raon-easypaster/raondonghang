@@ -20,8 +20,8 @@ async function getPhotos(): Promise<DriveFile[]> {
     throw new Error("GOOGLE_API_KEY is not defined.");
   }
 
-  // Fetch images and videos from the specific Google Drive folder
-  const query = `'${FOLDER_ID}' in parents and (mimeType contains 'image/' or mimeType contains 'video/') and trashed = false`;
+  // Fetch all files from the specific Google Drive folder and filter locally
+  const query = `'${FOLDER_ID}' in parents and trashed = false`;
   const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(
     query
   )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink,webViewLink)&orderBy=createdTime desc&pageSize=100`;
@@ -34,7 +34,8 @@ async function getPhotos(): Promise<DriveFile[]> {
   }
 
   const data = await res.json();
-  return data.files || [];
+  const files: DriveFile[] = data.files || [];
+  return files.filter(f => f.mimeType?.startsWith('image/') || f.mimeType?.startsWith('video/'));
 }
 
 export default async function GalleryPage() {
@@ -76,8 +77,8 @@ export default async function GalleryPage() {
 
           <div className="gallery-grid">
             {photos.map((photo) => {
-              // Increase thumbnail quality by replacing =s220 with =s1000
-              const highResUrl = photo.thumbnailLink ? photo.thumbnailLink.replace(/=s\d+/, "=s1000") : "";
+              // Use the new Google Drive direct download URL format to avoid 403 errors
+              const highResUrl = `https://lh3.googleusercontent.com/d/${photo.id}=s1000`;
               const isVideo = photo.mimeType.startsWith("video/");
               const targetUrl = isVideo && photo.webViewLink ? photo.webViewLink : highResUrl;
               

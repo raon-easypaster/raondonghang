@@ -37,16 +37,18 @@ async function getImages(folderId: string): Promise<DriveFile[]> {
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) return [];
 
-  // Fetch images inside the selected folder
-  const query = `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`;
+  // Fetch files inside the selected folder and filter images locally
+  // (mimeType contains is not officially supported by Drive API for mimeType)
+  const query = `'${folderId}' in parents and trashed = false`;
   const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(
     query
-  )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink)&orderBy=name asc&pageSize=20`;
+  )}&key=${apiKey}&fields=files(id,name,mimeType,thumbnailLink,webContentLink)&orderBy=name asc&pageSize=50`;
 
   const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) return [];
   const data = await res.json();
-  return data.files || [];
+  const files: DriveFile[] = data.files || [];
+  return files.filter(f => f.mimeType?.startsWith('image/'));
 }
 
 export default async function BulletinPage(props: {
@@ -101,7 +103,7 @@ export default async function BulletinPage(props: {
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
                     {images.map((img) => {
-                      const highResUrl = img.thumbnailLink ? img.thumbnailLink.replace(/=s\d+/, "=s2000") : "";
+                      const highResUrl = `https://lh3.googleusercontent.com/d/${img.id}=s2000`;
                       return (
                         <img 
                           key={img.id}
