@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HomePopup from "@/components/HomePopup";
 import { BlogPost, getBlogPosts, getNoticePosts } from "./actions";
 
 const wordLinks = [
@@ -47,6 +48,7 @@ export default function Home() {
 
   return (
     <main>
+      <HomePopup />
       <section className="hero" id="hero">
         <Image src="/church-photo2.jpg" alt="아이와 어른이 함께한 라온동행교회 공동체" fill priority className="hero-image" sizes="100vw" />
         <div className="hero-overlay" />
