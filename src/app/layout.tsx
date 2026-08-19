@@ -5,8 +5,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "라온동행교회 - 즐거운 동행, 삶으로 드리는 신앙",
-  description: "하나님과, 이웃과, 세상과 즐겁게 동행하는 라온동행교회입니다.",
-  viewport: "width=device-width, initial-scale=1.0",
+  description: "건물보다 사람을 소중히 여기며 일상의 공간에서 하나님과 이웃, 세상과 동행하는 라온동행교회입니다.",
 };
 
 export default function RootLayout({

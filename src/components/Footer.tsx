@@ -3,10 +3,10 @@ export default function Footer() {
         <footer>
             <div className="container">
                 <div className="footer-declaration">
-                    함께 걷는 믿음,<br />
-                    함께 자라는 교회
+                    건물을 위한 교회보다<br />
+                    사람을 위한 교회가 되고 싶습니다.
                 </div>
-                <p className="footer-copy">© 2016 Raon Donghang Church</p>
+                <p className="footer-copy">기독교대한성결교회 라온동행교회 · © 2016 Raon Donghang Church</p>
             </div>
         </footer>
     );
