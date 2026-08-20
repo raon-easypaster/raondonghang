@@ -15,6 +15,59 @@ export type BlogPost = {
   description: string;
 };
 
+export type YouTubeShort = {
+  id: string;
+  title: string;
+  link: string;
+  embedUrl: string;
+};
+
+const YOUTUBE_SHORTS_URL = "https://www.youtube.com/@easypaster/shorts";
+
+export async function getLatestShorts(): Promise<YouTubeShort[]> {
+  try {
+    const response = await fetch(YOUTUBE_SHORTS_URL, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) return [];
+
+    const html = await response.text();
+    const matches = html.matchAll(/"entityId":"shorts-shelf-item-([A-Za-z0-9_-]{11})"/g);
+    const ids = Array.from(new Set(Array.from(matches, (match) => match[1]))).slice(0, 4);
+
+    return Promise.all(
+      ids.map(async (id, index) => {
+        let title = `라온동행 말씀 쇼츠 ${index + 1}`;
+
+        try {
+          const metadataResponse = await fetch(
+            `https://www.youtube.com/oembed?url=https://www.youtube.com/shorts/${id}&format=json`,
+            { next: { revalidate: 300 } }
+          );
+          if (metadataResponse.ok) {
+            const metadata = (await metadataResponse.json()) as { title?: string };
+            if (metadata.title) title = metadata.title;
+          }
+        } catch {
+          // Keep the fallback title when YouTube metadata is temporarily unavailable.
+        }
+
+        return {
+          id,
+          title,
+          link: `https://www.youtube.com/shorts/${id}`,
+          embedUrl: `https://www.youtube.com/embed/${id}`,
+        };
+      })
+    );
+  } catch (error) {
+    console.error("Failed to fetch YouTube Shorts:", error);
+    return [];
+  }
+}
+
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const feed = await parser.parseURL("https://rss.blog.naver.com/galeb76.xml");

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HomePopup from "@/components/HomePopup";
-import { BlogPost, getBlogPosts, getNoticePosts } from "./actions";
+import { BlogPost, getBlogPosts, getLatestShorts, getNoticePosts, YouTubeShort } from "./actions";
 
 const wordLinks = [
   { eyebrow: "한눈에 읽기", title: "설교 인포그래픽", description: "주일 말씀의 흐름과 핵심을 짧게 살펴봅니다.", href: "https://raon-easypaster.github.io/infographic/" },
@@ -12,22 +12,19 @@ const wordLinks = [
   { eyebrow: "매일 함께 걷기", title: "매일 성경 묵상", description: "오늘의 말씀을 천천히 읽고 삶에 머물게 합니다.", href: "https://raon-easypaster.github.io/daily/" },
 ];
 
-const sermonArchive = [
-  { title: "천킬로의 편지일꾼 뵈뵈", href: "https://www.youtube.com/watch?v=WXMg28Sdc04" },
-  { title: "보고 싶습니다 (롬 31)", href: "https://www.youtube.com/watch?v=A5mdIgC7HbY" },
-  { title: "태초의 빛 (요한복음 1)", href: "https://www.youtube.com/watch?v=kclm98HrG9I" },
-  { title: "내가 꼭 갈께 (로마서 3)", href: "https://www.youtube.com/watch?v=uMOR8ZHhsNE" },
-];
-
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [noticePosts, setNoticePosts] = useState<BlogPost[]>([]);
+  const [shorts, setShorts] = useState<YouTubeShort[]>([]);
+  const [shortsLoaded, setShortsLoaded] = useState(false);
 
   useEffect(() => {
-    Promise.all([getBlogPosts(), getNoticePosts()]).then(([blogs, notices]) => {
+    Promise.all([getBlogPosts(), getNoticePosts(), getLatestShorts()]).then(([blogs, notices, latestShorts]) => {
       setBlogPosts(blogs);
       setNoticePosts(notices);
+      setShorts(latestShorts);
+      setShortsLoaded(true);
     });
 
     const elements = document.querySelectorAll(".reveal");
@@ -109,14 +106,25 @@ export default function Home() {
 
       <section className="section word" id="word">
         <div className="container">
-          <div className="section-heading split reveal"><div><span className="eyebrow">이번 주 말씀</span><h2>짧게 만나고,<br />깊이 묵상하세요.</h2></div><p>긴 영상을 바로 보지 않아도 괜찮습니다. 한 문장에서 시작해 말씀을 천천히 삶으로 이어가 보세요.</p></div>
-          <div className="featured-word reveal">
-            <div className="video-wrap"><iframe src="https://www.youtube.com/embed/WXMg28Sdc04" title="이번 주 말씀: 천킬로의 편지일꾼 뵈뵈" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
-            <div className="featured-copy"><span className="card-kicker">이번 주 설교</span><h3>천킬로의 편지일꾼 뵈뵈</h3><p className="one-line-message"><b>한 문장 메시지</b>말씀을 품고 누군가의 길을 함께 걷는 한 사람이 공동체를 세웁니다.</p><a href="https://www.youtube.com/watch?v=WXMg28Sdc04" target="_blank" rel="noopener noreferrer" className="button button-dark">설교 영상 보기</a></div>
-          </div>
+          <div className="section-heading split reveal"><div><span className="eyebrow">이번 주 말씀</span><h2>짧은 말씀을<br />쇼츠로 만나보세요.</h2></div><p>가장 최근에 올라온 말씀 쇼츠부터 최대 4개까지 자동으로 보여드립니다. 짧게 만난 말씀을 묵상으로 이어가 보세요.</p></div>
+          {shorts.length > 0 ? (
+            <div className={`shorts-grid shorts-count-${shorts.length} reveal is-visible`}>
+              {shorts.map((short, index) => (
+                <article className="shorts-card" key={short.id}>
+                  <div className="shorts-player">
+                    {index === 0 && <span className="latest-badge">가장 최근</span>}
+                    <iframe src={short.embedUrl} title={short.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                  </div>
+                  <div className="shorts-info"><span>말씀 쇼츠 {String(index + 1).padStart(2, "0")}</span><h3>{short.title}</h3><a href={short.link} target="_blank" rel="noopener noreferrer">YouTube에서 보기 ↗</a></div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="shorts-empty reveal is-visible"><p>{shortsLoaded ? "현재 공개된 말씀 쇼츠를 불러오지 못했습니다." : "최신 말씀 쇼츠를 불러오는 중입니다."}</p><a href="https://www.youtube.com/@easypaster/shorts" target="_blank" rel="noopener noreferrer" className="button button-dark">쇼츠 채널 바로가기</a></div>
+          )}
+          <div className="shorts-footer reveal"><p>새 쇼츠가 올라오면 최대 5분 안에 가장 최근 영상이 맨 앞으로 자동 반영됩니다.</p><a href="https://www.youtube.com/@easypaster/shorts" target="_blank" rel="noopener noreferrer" className="text-link">쇼츠 전체 보기 <span>↗</span></a></div>
           <div className="word-grid reveal">{wordLinks.map((item) => <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className="word-card"><span className="card-kicker">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.description}</p><span className="card-arrow">바로가기 →</span></a>)}</div>
           <div className="archive-row reveal"><div><h3>더 깊이 이어가고 싶다면</h3><p>설교부터 소그룹 나눔까지, 기존 자료를 한곳에서 찾을 수 있습니다.</p></div><div className="archive-links"><a href="https://www.youtube.com/@easypaster" target="_blank" rel="noopener noreferrer">전체 설교</a><a href="https://raon-easypaster.github.io/share/" target="_blank" rel="noopener noreferrer">소그룹 나눔지</a><a href="https://raon-easypaster.github.io/archive/" target="_blank" rel="noopener noreferrer">교회 자료실</a></div></div>
-          <details className="sermon-list reveal"><summary>최근 설교 목록 보기</summary><div>{sermonArchive.map((sermon) => <a key={sermon.href} href={sermon.href} target="_blank" rel="noopener noreferrer">{sermon.title}<span>↗</span></a>)}</div></details>
         </div>
       </section>
 
