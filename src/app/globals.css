@@ -127,6 +127,10 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 253, 248,
 .logo-story-copy b { color: #f6d899; transition: margin-left .2s ease; }
 .logo-story-card:hover b { margin-left: 4px; }
 
+/* Community banner */
+.community-banner { padding: 72px 0; background: #050605; }
+.community-banner-image { display: block; width: 100%; height: auto; }
+
 /* Word */
 .word { background: var(--paper); }
 .shorts-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-items: start; }
@@ -331,6 +335,7 @@ footer { padding: 68px 0; background: #101b15; color: white; }
   .logo-story-mark img { width: 78px; }
   .logo-story-copy strong { font-size: 1.05rem; }
   .logo-story-copy em { display: none; }
+  .community-banner { padding: 32px 0; }
   .featured-word { min-height: 0; }
   .shorts-grid, .shorts-grid.shorts-count-1, .shorts-grid.shorts-count-2, .shorts-grid.shorts-count-3 { grid-template-columns: 1fr; }
   .shorts-card { width: min(100%, 340px); margin-inline: auto; }

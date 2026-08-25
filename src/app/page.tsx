@@ -104,6 +104,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="community-banner" aria-label="라온동행교회 공동체">
+        <div className="container reveal">
+          <Image
+            src="/raondonghang-community-banner.png"
+            alt="라온동행교회 성도들의 모습이 담긴 RAONDONGHAENG 이미지"
+            width={1672}
+            height={941}
+            sizes="(max-width: 720px) calc(100vw - 36px), 1160px"
+            className="community-banner-image"
+          />
+        </div>
+      </section>
+
       <section className="section word" id="word">
         <div className="container">
           <div className="section-heading split reveal"><div><span className="eyebrow">이번 주 말씀</span><h2>짧은 말씀을<br />쇼츠로 만나보세요.</h2></div><p>가장 최근에 올라온 말씀 쇼츠부터 최대 4개까지 자동으로 보여드립니다. 짧게 만난 말씀을 묵상으로 이어가 보세요.</p></div>
