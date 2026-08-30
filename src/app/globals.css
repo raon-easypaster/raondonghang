@@ -275,6 +275,9 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(255, 253, 248,
 .popup-link-item { padding: 14px; display: flex; gap: 12px; border-radius: 10px; background: var(--sage-light); }
 .popup-link-item .text { display: flex; flex-direction: column; font-weight: 700; }
 .popup-link-item small { color: var(--ink-soft); font-weight: 400; }
+.popup-link-featured { align-items: center; padding: 17px 16px; background: var(--forest-deep); color: white; box-shadow: 0 10px 24px rgba(24,51,40,.16); }
+.popup-link-featured small { color: rgba(255,255,255,.72); }
+.popup-link-arrow { margin-left: auto; color: var(--sun); font-size: 1.3rem; font-weight: 800; }
 .popup-footer { padding: 14px 22px; background: var(--cream); text-align: right; }
 .dont-show { display: inline-flex; gap: 8px; align-items: center; font-size: .85rem; }
 

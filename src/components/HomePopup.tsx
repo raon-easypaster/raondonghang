@@ -137,6 +137,14 @@ export default function HomePopup() {
                 </div>
                 <div className="popup-body">
                     <Link
+                        href="/bulletin"
+                        className="popup-link-item popup-link-featured"
+                    >
+                        <span className="icon">📰</span>
+                        <span className="text">가장 최근 주보 보기 <small>이번 주 예배 순서와 교회 소식</small></span>
+                        <span className="popup-link-arrow" aria-hidden="true">→</span>
+                    </Link>
+                    <Link
                         href={links.infographic}
                         target="_blank"
                         className="popup-link-item"
