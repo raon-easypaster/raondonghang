@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
   },
+  verification: {
+    other: {
+      "naver-site-verification": "f978d45073003a43f09b29866f178e6509e0243c",
+    },
+  },
 };
 
 export default function RootLayout({
