@@ -1,4 +1,11 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "라온 사진첩 | 라온동행교회",
+  description: "함께 예배하고 교제하며 동행하는 라온동행교회의 공동체 사진입니다.",
+  alternates: { canonical: "/gallery" },
+};
 
 // Revalidate this page every 60 seconds so new photos show up without rebuilding
 export const revalidate = 60; 

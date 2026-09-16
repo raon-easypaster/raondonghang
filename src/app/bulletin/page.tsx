@@ -1,4 +1,11 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "온라인 주보 | 라온동행교회",
+  description: "매주 발행되는 라온동행교회의 온라인 주보입니다.",
+  alternates: { canonical: "/bulletin" },
+};
 
 export const revalidate = 60; 
 

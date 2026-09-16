@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "교회 로고 이야기 | 라온동행교회",
+    description: "라온동행교회 로고에 담긴 즐거움, 십자가의 길, 동행의 의미를 소개합니다.",
+    alternates: { canonical: "/logo" },
+};
 
 export default function LogoPage() {
     return (

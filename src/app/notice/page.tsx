@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { getNoticePosts } from "@/app/actions";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "교회소식 | 라온동행교회",
+    description: "라온동행교회의 최근 소식과 공동체 이야기를 전합니다.",
+    alternates: { canonical: "/notice" },
+};
 
 // Force dynamic rendering so we always get the latest notices
 export const dynamic = "force-dynamic";
