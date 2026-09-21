@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/notice/edit/",
     },
-    sitemap: "https://raondonghaeng.kr/sitemap.xml",
-    host: "https://raondonghaeng.kr",
+    sitemap: "https://raondonghaeng.org/sitemap.xml",
+    host: "https://raondonghaeng.org",
   };
 }
