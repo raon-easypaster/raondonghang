@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 // Revalidate this page every 60 seconds so new photos show up without rebuilding
 export const revalidate = 60; 
 
-const FOLDER_ID = "1gralGNz2JmXHXVEt-1r7-SMlF5ZAJxMb";
+const FOLDER_ID = "1MTBXYOkf3pl_CQMwvIosAlrbjpIjgq5P";
 
 type DriveFile = {
   id: string;
